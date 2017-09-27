@@ -1,0 +1,10 @@
+E:\VisualProject\MyApp1\MyApp1\bin\Debug\MyApp1.exe.config
+E:\VisualProject\MyApp1\MyApp1\bin\Debug\MyApp1.exe
+E:\VisualProject\MyApp1\MyApp1\bin\Debug\MyApp1.pdb
+E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.Form1.resources
+E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.Properties.Resources.resources
+E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.csproj.GenerateResource.Cache
+E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.csproj.CoreCompileInputs.cache
+E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.exe
+E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.pdb
+E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.csprojResolveAssemblyReference.cache
