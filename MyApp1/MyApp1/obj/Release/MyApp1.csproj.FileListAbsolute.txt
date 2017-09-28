@@ -1,0 +1,10 @@
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\bin\Release\MyApp1.exe.config
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\bin\Release\MyApp1.exe
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\bin\Release\MyApp1.pdb
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Release\MyApp1.Form1.resources
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Release\MyApp1.Properties.Resources.resources
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Release\MyApp1.csproj.GenerateResource.Cache
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Release\MyApp1.csproj.CoreCompileInputs.cache
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Release\MyApp1.exe
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Release\MyApp1.pdb
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Release\MyApp1.csprojResolveAssemblyReference.cache

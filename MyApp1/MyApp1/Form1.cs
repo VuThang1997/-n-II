@@ -17,11 +17,6 @@ namespace MyApp1
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Xoa man hinh cua app
@@ -99,33 +94,7 @@ namespace MyApp1
             //Cho phep dao nguoc hieu ung voi Undo
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (richTextBox1.Text.Length > 0)
-            {
-                undoToolStripMenuItem.Enabled = true;
-                cutToolStripMenuItem.Enabled = true;
-                copyToolStripMenuItem.Enabled = true;
-                selectAllToolStripMenuItem.Enabled = true;
-                boldToolStripMenuItem.Enabled = true;
-                italicToolStripMenuItem.Enabled = true;
-                normalToolStripMenuItem.Enabled = true;
-                strikeThroughToolStripMenuItem.Enabled = true;
-                underlineToolStripMenuItem.Enabled = true;
-            }
-            else{
-                undoToolStripMenuItem.Enabled = false;
-                redoToolStripMenuItem.Enabled = false;
-                cutToolStripMenuItem.Enabled = false;
-                copyToolStripMenuItem.Enabled = false;
-                selectAllToolStripMenuItem.Enabled = false;
-                boldToolStripMenuItem.Enabled = false;
-                italicToolStripMenuItem.Enabled = false;
-                normalToolStripMenuItem.Enabled = false;
-                strikeThroughToolStripMenuItem.Enabled = false;
-                underlineToolStripMenuItem.Enabled = false;
-            }
-        }
+        
 
 
         private void fontToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,19 +121,6 @@ namespace MyApp1
             MessageBox.Show("Version 1.0 by V.H.T", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-       
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (richTextBox1.Text != "")
-            {
-               //
-            }
-        }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -205,6 +161,107 @@ namespace MyApp1
         private void normalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Regular);
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveAs = new SaveFileDialog();
+
+            saveAs.Filter = "text files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveAs.FilterIndex = 2;
+            saveAs.RestoreDirectory = true;
+
+            if (saveAs.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamWriter write = new System.IO.StreamWriter(saveAs.FileName.ToString());
+                write.WriteLine(richTextBox1.Text);
+                write.Close();
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            newToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            openToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            saveToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            cutToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            pasteToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            copyToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            redoToolStripMenuItem_Click(sender, e);
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            undoToolStripMenuItem_Click(sender, e);
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Length > 0)
+            {
+                undoToolStripMenuItem.Enabled = true;
+                cutToolStripMenuItem.Enabled = true;
+                copyToolStripMenuItem.Enabled = true;
+                selectAllToolStripMenuItem.Enabled = true;
+                boldToolStripMenuItem.Enabled = true;
+                italicToolStripMenuItem.Enabled = true;
+                normalToolStripMenuItem.Enabled = true;
+                strikeThroughToolStripMenuItem.Enabled = true;
+                underlineToolStripMenuItem.Enabled = true;
+                toolStripButton1.Enabled = true;
+                toolStripButton2.Enabled = true;
+                toolStripButton3.Enabled = true;
+                toolStripButton4.Enabled = true;
+                toolStripButton5.Enabled = true;
+                toolStripButton6.Enabled = true;
+                toolStripButton7.Enabled = true;
+                toolStripButton8.Enabled = true;
+            }
+            else
+            {
+                undoToolStripMenuItem.Enabled = false;
+                redoToolStripMenuItem.Enabled = false;
+                cutToolStripMenuItem.Enabled = false;
+                copyToolStripMenuItem.Enabled = false;
+                selectAllToolStripMenuItem.Enabled = false;
+                boldToolStripMenuItem.Enabled = false;
+                italicToolStripMenuItem.Enabled = false;
+                normalToolStripMenuItem.Enabled = false;
+                strikeThroughToolStripMenuItem.Enabled = false;
+                underlineToolStripMenuItem.Enabled = false;
+                toolStripButton1.Enabled = false;
+                toolStripButton2.Enabled = false;
+                toolStripButton3.Enabled = false;
+                toolStripButton4.Enabled = false;
+                toolStripButton5.Enabled = false;
+                toolStripButton6.Enabled = false;
+                toolStripButton7.Enabled = false;
+                toolStripButton8.Enabled = false;
+            }
         }
     }
 }

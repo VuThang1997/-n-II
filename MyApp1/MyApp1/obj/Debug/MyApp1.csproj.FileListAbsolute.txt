@@ -8,3 +8,13 @@ E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.csproj.CoreCompileInputs.cache
 E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.exe
 E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.pdb
 E:\VisualProject\MyApp1\MyApp1\obj\Debug\MyApp1.csprojResolveAssemblyReference.cache
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\bin\Debug\MyApp1.exe.config
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\bin\Debug\MyApp1.exe
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\bin\Debug\MyApp1.pdb
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Debug\MyApp1.csprojResolveAssemblyReference.cache
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Debug\MyApp1.Form1.resources
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Debug\MyApp1.Properties.Resources.resources
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Debug\MyApp1.csproj.GenerateResource.Cache
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Debug\MyApp1.csproj.CoreCompileInputs.cache
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Debug\MyApp1.exe
+C:\Users\admin.admin-PC\Do-an-II\MyApp1\MyApp1\obj\Debug\MyApp1.pdb
