@@ -22,7 +22,6 @@ namespace MyApp1
             //Xoa man hinh cua app
             richTextBox1.Text = "";
             richTextBox1.Clear();
-
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -36,7 +35,6 @@ namespace MyApp1
 
                 this.Text = open.FileName;      //Chuyen ten form thanh ten file duoc mo
             }
-
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,9 +92,6 @@ namespace MyApp1
             //Cho phep dao nguoc hieu ung voi Undo
         }
 
-        
-
-
         private void fontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FontDialog font = new FontDialog();
@@ -120,7 +115,6 @@ namespace MyApp1
         {
             MessageBox.Show("Version 1.0 by V.H.T", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -261,7 +255,108 @@ namespace MyApp1
                 toolStripButton6.Enabled = false;
                 toolStripButton7.Enabled = false;
                 toolStripButton8.Enabled = false;
+
+                //Viet lai doan text khoi dau cho LineNumberTextBox
+                AddLineNumbers();
             }
+        }
+
+        private int getWidth()
+        {
+            //Lay do rong cua LineNumberTextBox cho phu hop
+            int width = 25;
+            int lineLength = richTextBox1.Lines.Length;
+            int size = (int)richTextBox1.Font.Size;
+
+            if (lineLength < 100)
+            {
+                width += 20 + size;
+            }
+            else if(lineLength < 1000)
+            {
+                width += 30 + size;
+            }
+            else
+            {
+                width += 50 + size;
+            }
+
+            return width;
+        }
+
+        private void AddLineNumbers()
+        {
+            // tao doi tuong pt cua cau truc Point va khoi tao gia tri (0;0)
+            Point pt = new Point(0, 0);
+            // lay cac gia tri firstIndex va firstLine tu richTextBox1
+            int firstIndex = richTextBox1.GetCharIndexFromPosition(pt);
+            int firstLine = richTextBox1.GetLineFromCharIndex(firstIndex);
+
+            // Chuyen toa do cua pt ve vi tri cuoi control
+            pt.X = ClientRectangle.Width;
+            pt.Y = ClientRectangle.Height;
+            // lay cac gia tri lastIndex va lastLine tu richTextBox1
+            int lastIndex = richTextBox1.GetCharIndexFromPosition(pt);
+            int lastLine = richTextBox1.GetLineFromCharIndex(lastIndex);
+
+            // Thiet lap thuoc tinh de doan text hien thi se nam o giua
+            LineNumberTextBox.SelectionAlignment = HorizontalAlignment.Center;
+            // xoa het cac doan text truoc do va thiet lap do rong cua LineNumberTextBox
+            LineNumberTextBox.Text = "";
+            LineNumberTextBox.Width = getWidth();
+
+            // Dien so thu tu tuong ung voi moi dong, co de them 1 dong cuoi cung
+            for (int i = firstLine; i < lastLine + 2; i++)
+            {
+                LineNumberTextBox.Text += i + 1 + "\n";
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LineNumberTextBox.Font = richTextBox1.Font;
+            richTextBox1.Select();
+            AddLineNumbers();
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            AddLineNumbers();
+        }
+
+        private void richTextBox1_SelectionChanged(object sender, EventArgs e)
+        {
+            //Su kien SelectionChanged duoc kich hoat khi co 1 o duoc chon hay su lua chon bi huy
+            Point pt = richTextBox1.GetPositionFromCharIndex(richTextBox1.SelectionStart);
+            if (pt.X == 1)
+            {
+                AddLineNumbers();
+            }
+        }
+
+        private void richTextBox1_VScroll(object sender, EventArgs e)
+        {
+            //Vertical Scroll - cuon thanh theo chieu doc
+            LineNumberTextBox.Text = "";
+            AddLineNumbers();
+            LineNumberTextBox.Invalidate();
+        }
+
+        private void richTextBox1_FontChanged(object sender, EventArgs e)
+        {
+            //Su kien FontChanged duoc kich hoat khi font chu trong richTextBox1 thay doi
+            //Doi font chu cua LineNumberTextBox cho giong font cua richTextBox1 roi viet lai cac chi so
+            LineNumberTextBox.Font = richTextBox1.Font;
+            richTextBox1.Select();
+            AddLineNumbers();
+        }
+
+        private void LineNumberTextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            //Su kien MouseDown duoc kich hoat khi con tro chuot nhan nham vao 1 dong bat ki trong LineNumberTextBox
+            //Khi do, con tro chuot se tro ve trong richTextBox1 va khong dong nao cua LineNumberTextBox duoc chon
+            richTextBox1.Select();
+            LineNumberTextBox.DeselectAll();
         }
     }
 }
