@@ -358,5 +358,48 @@ namespace MyApp1
             richTextBox1.Select();
             LineNumberTextBox.DeselectAll();
         }
+
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Su kien richTextBox1 KeyPress voi CheckBox duoc chon
+            //Khi co cac dau mo {, [, (, <, duoc nhap vao thi tu dong them dau dong tuong ung
+            //vao vi tri (SelectionStart+1). Sau khi them thi bo sung 1 dong va thiet lap e.Handled = true
+            //cuoi cung thiet lap SelectionStart toi vi tri dinh truoc
+            if (checkBox1.Checked == true)
+            {
+                char character = e.KeyChar;
+                int startPoint = richTextBox1.SelectionStart;
+
+                switch(character)
+                {
+                    case '(':
+                        richTextBox1.Text = richTextBox1.Text.Insert(startPoint, "()");
+                        e.Handled = true;
+                        richTextBox1.SelectionStart = startPoint + 1;
+                        break;
+
+                    case '{':
+                        richTextBox1.Text = richTextBox1.Text.Insert(startPoint, "{}");
+                        e.Handled = true;
+                        richTextBox1.SelectionStart = startPoint + +1;
+                        break;
+
+                    case '[':
+                        richTextBox1.Text = richTextBox1.Text.Insert(startPoint, "[]");
+                        e.Handled = true;
+                        richTextBox1.SelectionStart = startPoint + 1;
+                        break;
+
+                    case '<':
+                        richTextBox1.Text = richTextBox1.Text.Insert(startPoint, "<>");
+                        e.Handled = true;
+                        richTextBox1.SelectionStart = startPoint + 1;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }
