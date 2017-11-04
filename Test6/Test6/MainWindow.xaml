@@ -1,0 +1,95 @@
+﻿<RibbonWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Test6"
+        xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="Test6.MainWindow"
+        mc:Ignorable="d"
+        Title="MyNotepad" Height="550" Width="525">
+    <Grid Margin="-9,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Design ribbon-->
+        <Ribbon x:Name="ribbon">
+
+            <!-- Application Menu -->
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu>
+                    <RibbonApplicationMenuItem x:Name="appNew" Click="appNew_Click" Header="New" ImageSource ="Resources/NEW.png" KeyTip="N"/>
+                    <RibbonApplicationMenuItem x:Name="appOpen" Click="appOpen_Click" Header="Open" ImageSource ="Resources/OPEN.png" KeyTip="O"/>
+                    <RibbonApplicationMenuItem x:Name="appSave" Header="Save" ImageSource ="Resources/SAVE.png" KeyTip="S"/>
+                    <RibbonApplicationMenuItem x:Name="appSaveAs" Header="Save As" ImageSource ="Resources/SAVE AS.png"/>
+                    <RibbonApplicationMenuItem x:Name="appExit" Header="Exit" ImageSource ="Resources/EXIT.png"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+
+            <!--QuickAccessToolbar-->
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar>
+                    <RibbonButton x:Name="saveButton1" SmallImageSource="Resources/SAVE.png" KeyTip="S"/>
+                    <RibbonButton x:Name="undoButton1" SmallImageSource="Resources/UNDO.png" IsEnabled="False"/>
+                    <RibbonButton x:Name="redoButton1" SmallImageSource="Resources/REDO.png" IsEnabled="False"/>
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+
+            <!--HelpPane -->
+            <Ribbon.HelpPaneContent>
+                <RibbonButton x:Name="helpButton" SmallImageSource="Resources/HELP.png"/>
+            </Ribbon.HelpPaneContent>
+
+            <!-- RibbonTab 1: GENERAL-->
+            <RibbonTab Header="GENERAL">
+
+                <!--RibbonGroup 1: Clipboard-->
+                <RibbonGroup x:Name="CilpboradGroup" Header="Clipboard">
+                    <RibbonButton x:Name="pasteButton" LargeImageSource="Resources/PASTE.png" Label ="Paste" KeyTip="V"/>
+                    <RibbonButton x:Name="cutButton" SmallImageSource="Resources/CUT.png" Label="Cut" KeyTip="X" IsEnabled="False"/>
+                    <RibbonButton x:Name="copyButton" SmallImageSource="Resources/COPY.png" Label="Copy" KeyTip="C" IsEnabled="False"/>
+                </RibbonGroup>
+
+                <!--RibbonGroup 2: Edits-->
+                <RibbonGroup x:Name="EditsGroup" Header="Edits">
+                    <RibbonButton x:Name="undoButton2" SmallImageSource="Resources/UNDO.png" Label="Undo" IsEnabled="False"/>
+                    <RibbonButton x:Name="redoButton2" SmallImageSource="Resources/REDO.png" Label="Redo" IsEnabled="False"/>
+                    <RibbonButton x:Name="selectAllButton" SmallImageSource="Resources/SELECT ALL.png" Label="Select All" IsEnabled="False"/>
+                </RibbonGroup>
+
+                <!-- RibbonGroup 3: Font -->
+                <RibbonGroup x:Name="FontGroup" Header="Font">
+                    <RibbonButton x:Name="boldButton" LargeImageSource="Resources/BOLD.png" Label ="Bold" KeyTip="B"/>
+                    <RibbonButton x:Name="italicButton" LargeImageSource="Resources/ITALIC.png" Label ="Italic" KeyTip="I"/>
+                    <RibbonButton x:Name="underlineButton" LargeImageSource="Resources/UNDERLINE.png" Label ="Underline" KeyTip="U"/>
+                    <RibbonButton x:Name="spikeButton" SmallImageSource="Resources/SPIKE_THROUGH.png" Label="Spike Through"/>
+                    <RibbonButton x:Name="deleteButton" SmallImageSource="Resources/DELETE.png" Label="Delete" IsEnabled="False"/>
+                    <RibbonButton x:Name="textColorButton" SmallImageSource="Resources/TEXT COLOR.png" Label="Text Color"/>
+
+                </RibbonGroup>
+            </RibbonTab>
+
+            <!--RibbonTab 2: ADVANCED-->
+            <RibbonTab Header="ADVANCED">
+
+                <!--Group 1-->
+                <RibbonGroup >
+                    <RibbonButton x:Name="speechObject" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer" Click="speechObject_Click"/>
+                </RibbonGroup>
+
+                <!--Group 2-->
+                <RibbonGroup >
+                    <RibbonButton x:Name="dateTime" Click="dateTime_Click" LargeImageSource="Resources/DATE.png" Label="Date/Time"/>
+                </RibbonGroup>
+
+                <!--Group 3-->
+                <RibbonGroup >
+                    <RibbonCheckBox x:Name="autoComplete" Label="AutoCompleteBarracks" IsChecked="False"/>
+                </RibbonGroup>
+
+            </RibbonTab>
+        </Ribbon>
+        <RichTextBox x:Name="richTextBox1" HorizontalAlignment="Left" Height="381" Grid.Row="1" VerticalAlignment="Top" Width="526"/>
+    </Grid>
+</RibbonWindow>
