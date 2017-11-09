@@ -107,11 +107,7 @@
     <Resource Include="Resources\BOLD.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\COPY.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\CUT.png" />
-    <Resource Include="Resources\DELETE.png" />
     <Resource Include="Resources\EXIT.png" />
     <Resource Include="Resources\HELP.png" />
     <Resource Include="Resources\ITALIC.png" />
@@ -140,6 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\BK COLOR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DELETE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\COPY.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
