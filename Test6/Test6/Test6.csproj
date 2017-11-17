@@ -116,7 +116,7 @@
     <Resource Include="Resources\REDO.png" />
     <Resource Include="Resources\SAVE.png" />
     <Resource Include="Resources\SOUND.png" />
-    <Resource Include="Resources\SPIKE_THROUGH.png" />
+    <Resource Include="Resources\STRIKE_THROUGH.png" />
     <Resource Include="Resources\UNDERLINE.png" />
     <Resource Include="Resources\UNDO.png" />
   </ItemGroup>

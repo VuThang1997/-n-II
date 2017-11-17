@@ -7,27 +7,51 @@
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="Test6.MainWindow"
         mc:Ignorable="d"
         Title="MyNotepad" Height="450" Width="450">
-    <Grid Margin="-9,0,0,0">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="OpenCommandBinding_Executed" />
+        <CommandBinding Command="New" Executed="NewCommandBinding_Executed"/>
+        <CommandBinding Command="Save" Executed="SaveCommandBinding_Executed"/>
+        <CommandBinding Command="SaveAs" Executed="SaveAsCommandBinding_Executed"/>
+        
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="Open" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="New" />
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="Save" />
+    </Window.InputBindings>
+    
+    <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Design ribbon-->
-        <Ribbon x:Name="ribbon" Margin="10,0,0,0" Width="Auto">
+        <Ribbon x:Name="ribbon" Width="Auto">
 
             <!-- Application Menu -->
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu>
+                    
                     <RibbonApplicationMenuItem 
-                        x:Name="appNew" Click="appNew_Click" Header="New" ImageSource ="Resources/NEW.png" KeyTip="N"/>
+                        x:Name="appNew" Header="New" ImageSource ="Resources/NEW.png" KeyTip="N"
+                        InputGestureText="Ctrl+N" Command="New" />
+
                     <RibbonApplicationMenuItem 
-                        x:Name="appOpen" Click="appOpen_Click" Header="Open" ImageSource ="Resources/OPEN.png" KeyTip="O"/>
+                        x:Name="appOpen" Header="Open" ImageSource ="Resources/OPEN.png" KeyTip="O"
+                        InputGestureText="Ctrl+O" Command="Open" />
+
                     <RibbonApplicationMenuItem 
-                        x:Name="appSave"  Click="appSave_Click" Header="Save" ImageSource ="Resources/SAVE.png" KeyTip="S"/>
+                        x:Name="appSave" Header="Save" ImageSource ="Resources/SAVE.png" KeyTip="S"
+                        InputGestureText="Ctrl+S" Command="Save"/>
+                    
                     <RibbonApplicationMenuItem 
-                        x:Name="appSaveAs" Click="appSaveAs_Click" Header="Save As" ImageSource ="Resources/SAVE AS.png"/>
+                        x:Name="appSaveAs" Header="Save As" ImageSource ="Resources/SAVE AS.png"
+                        Command="SaveAs"/>
+                    
                     <RibbonApplicationMenuItem 
-                        x:Name="appExit" Click ="appExit_Click" Header="Exit" ImageSource ="Resources/EXIT.png"/>
+                        x:Name="appExit" Header="Exit" ImageSource ="Resources/EXIT.png"/>
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
@@ -35,11 +59,16 @@
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
                     <RibbonButton 
-                        x:Name="saveButton1" Click="saveButton1_Click" SmallImageSource="Resources/SAVE.png" KeyTip="S"/>
+                        x:Name="saveButton1" SmallImageSource="Resources/SAVE.png" KeyTip="S"
+                        ToolTipDescription="Save (Ctrl + S)"
+                        Command="Save"/>
                     <RibbonButton 
-                        x:Name="undoButton1" Click="undoButton1_Click" SmallImageSource="Resources/UNDO.png" IsEnabled="False"/>
+                        x:Name="undoButton1" Click="undoButton1_Click" SmallImageSource="Resources/UNDO.png" IsEnabled="False"
+                        ToolTipDescription="Undo Typing (Ctrl + Z)"/>
                     <RibbonButton 
-                        x:Name="redoButton1" Click="redoButton1_Click" SmallImageSource="Resources/REDO.png" IsEnabled="False"/>
+                        x:Name="redoButton1" SmallImageSource="Resources/REDO.png" IsEnabled="False"
+                        ToolTipDescription="Redo (Ctrl + Y)"
+                        Click="redoButton1_Click"/>
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
 
@@ -53,39 +82,53 @@
             <RibbonTab Header="GENERAL">
 
                 <!--RibbonGroup 1: Clipboard-->
-                <RibbonGroup x:Name="CilpboradGroup" Header="Clipboard">
+                <RibbonGroup x:Name="CilpboradGroup" Header="Clipboard" ToolTipTitle="Clipboard" ToolTipDescription="See all the item you've copied to the Cipboard">
                     <RibbonButton 
-                        x:Name="pasteButton" Click="pasteButton_Click" LargeImageSource="Resources/PASTE.png" Label ="Paste" KeyTip="V"/>
+                        x:Name="pasteButton" Click="pasteButton_Click" LargeImageSource="Resources/PASTE.png" Label ="Paste" KeyTip="V" 
+                        ToolTipDescription="Add content on the Clipboard to your documents" ToolTipTitle="Paste (Ctrl + V)" ToolTipService.ShowDuration="1000"
+                        />
+                    <RibbonButton
+                        x:Name="cutButton" SmallImageSource="Resources/CUT.png" 
+                        Label="Cut" KeyTip="X" IsEnabled="False" 
+                        ToolTipTitle="Cut (Ctrl+X)" ToolTipDescription="Remove the selection and put it on the Clipboard so you can paste it somewhere else "
+                        Command="ApplicationCommands.Cut"/>
                     <RibbonButton 
-                        x:Name="cutButton" Click="cutButton_Click" SmallImageSource="Resources/CUT.png" Label="Cut" KeyTip="X" IsEnabled="False"/>
-                    <RibbonButton 
-                        x:Name="copyButton" Click="copyButton_Click" SmallImageSource="Resources/COPY.png" Label="Copy" KeyTip="C" IsEnabled="False"/>
+                        x:Name="copyButton" Click="copyButton_Click" SmallImageSource="Resources/COPY.png" Label="Copy" KeyTip="C" IsEnabled="False" 
+                        ToolTipTitle="Copy (Ctrl+C)" ToolTipDescription="Put a copy of the selection on the Clipboard so you can paste it somewhere else" ToolTipService.ShowDuration="1000"/>
                 </RibbonGroup>
 
                 <!--RibbonGroup 2: Edits-->
                 <RibbonGroup x:Name="EditsGroup" Header="Edits">
                     <RibbonButton 
-                        x:Name="undoButton2" Click = "undoButton2_Click" SmallImageSource="Resources/UNDO.png" Label="Undo" IsEnabled="False"/>
+                        x:Name="undoButton2" Click = "undoButton2_Click" SmallImageSource="Resources/UNDO.png" Label="Undo" IsEnabled="False"
+                        ToolTipTitle="Undo (Ctrl+Z)"/>
                     <RibbonButton 
-                        x:Name="redoButton2" Click="redoButton2_Click" SmallImageSource="Resources/REDO.png" Label="Redo" IsEnabled="False"/>
+                        x:Name="redoButton2" Click="redoButton2_Click" SmallImageSource="Resources/REDO.png" Label="Redo" IsEnabled="False"
+                        ToolTipTitle="Redo (Ctrl+Y)"/>
                     <RibbonButton 
-                        x:Name="selectAllButton" Click="selectAllButton_Click" SmallImageSource="Resources/SELECT ALL.png" Label="Select All" IsEnabled="False"/>
+                        x:Name="selectAllButton" Click="selectAllButton_Click" SmallImageSource="Resources/SELECT ALL.png" Label="Select All" IsEnabled="False"
+                        ToolTipTitle="Select All (Ctrl+A)" ToolTipDescription="Select all text"/>
                 </RibbonGroup>
 
                 <!-- RibbonGroup 3: Font -->
                 <RibbonGroup x:Name="FontGroup" Header="Font">
                     <RibbonButton 
-                        x:Name="boldButton" Click="boldButton_Click" LargeImageSource="Resources/BOLD.png" Label ="Bold" KeyTip="B" IsEnabled="False"/>
+                        x:Name="boldButton" Click="boldButton_Click" LargeImageSource="Resources/BOLD.png" Label ="Bold" KeyTip="B" IsEnabled="False"
+                        ToolTipTitle="Bold (Ctrl+B)" ToolTipDescription="Make your text bold"/>
                     <RibbonButton 
-                        x:Name="italicButton" Click="italicButton_Click" LargeImageSource="Resources/ITALIC.png" Label ="Italic" KeyTip="I" IsEnabled="False"/>
+                        x:Name="italicButton" Click="italicButton_Click" LargeImageSource="Resources/ITALIC.png" Label ="Italic" KeyTip="I" IsEnabled="False"
+                        ToolTipTitle="Italic (Ctrl+I)" ToolTipDescription="Italicize your text"/>
                     <RibbonButton 
-                        x:Name="underlineButton" LargeImageSource="Resources/UNDERLINE.png" Label ="Underline" KeyTip="U" IsEnabled="False"/>
+                        x:Name="underlineButton" LargeImageSource="Resources/UNDERLINE.png" Label ="Underline" KeyTip="U" IsEnabled="False" Click="underlineButton_Click"
+                        ToolTipTitle="Underline (Ctrl+U)" ToolTipDescription="Underlines your text"/>
                     <RibbonButton 
-                        x:Name="spikeButton" SmallImageSource="Resources/SPIKE_THROUGH.png" Label="Spike Through" IsEnabled="False"/>
+                        x:Name="strikeButton" SmallImageSource="Resources/STRIKE_THROUGH.png" Label="Strike Through" IsEnabled="False" Click="strikeButton_Click"
+                        ToolTipTitle="Strikethrough" ToolTipDescription="Cross something out by drawing a line through it"/>
                     <RibbonButton 
                         x:Name="deleteButton" SmallImageSource="Resources/DELETE.png" Label="Delete" IsEnabled="False"/>
                     <RibbonButton 
-                        x:Name="textColorButton" SmallImageSource="Resources/TEXT COLOR.png" Label="Text Color" IsEnabled="False"/>
+                        x:Name="textColorButton" SmallImageSource="Resources/TEXT COLOR.png" Label="Text Color" IsEnabled="False"
+                        ToolTipTitle="Text Color" ToolTipDescription="Change the color of your text"/>
 
                 </RibbonGroup>
             </RibbonTab>
@@ -96,7 +139,7 @@
                 <!--Group 1-->
                 <RibbonGroup >
                     <RibbonButton 
-                        x:Name="speechObject" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer" Click="speechObject_Click" IsEnabled="False"/>
+                        x:Name="speechObject" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer" Click="speechObject_Click" IsEnabled="False" ToolTipDescription="Heelo"/>
                 </RibbonGroup>
 
                 <!--Group 2-->
@@ -112,7 +155,7 @@
             </RibbonTab>
         </Ribbon>
         <RichTextBox 
-            x:Name="richTextBox1" VerticalAlignment="Top" Grid.Row="1" Height="281" Margin="10,0,0,0" TextChanged="richTextBox1_TextChanged">
+            x:Name="richTextBox1" Grid.Row="1" Margin="10,10,10,10" TextChanged="richTextBox1_TextChanged" BorderBrush="#FFABB3AB">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
