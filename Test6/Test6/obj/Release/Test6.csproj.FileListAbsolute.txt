@@ -1,0 +1,15 @@
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\bin\Release\Test6.exe.config
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\bin\Release\Test6.exe
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\bin\Release\Test6.pdb
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\MainWindow.g.cs
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\App.g.cs
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6_MarkupCompile.cache
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6_MarkupCompile.lref
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\MainWindow.baml
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6.g.resources
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6.Properties.Resources.resources
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6.csproj.GenerateResource.Cache
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6.csproj.CoreCompileInputs.cache
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6.exe
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6.pdb
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Release\Test6.csprojResolveAssemblyReference.cache

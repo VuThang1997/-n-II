@@ -23,11 +23,6 @@ namespace Test6
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public class MyApplicationCommands
-    {
-        public static RoutedUICommand ExitApp = new RoutedUICommand("Exit the application", "ExitApp", typeof(MyApplicationCommands));
-    }
-
     public partial class MainWindow : RibbonWindow
     {
         public static string pathFile = null;  //bien global luu tru duong dan file
@@ -58,6 +53,11 @@ namespace Test6
                 this.Title = openFile.SafeFileName;
                 pathFile = openFile.FileName;
             }
+        }
+
+        private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -104,10 +104,10 @@ namespace Test6
         {
             saveAsFunc();
         }
-    
+
         //Cac chuc nang trong QuickAccessToolbar
 
-        public void undoButton1_Click (object sender, EventArgs e)
+        private void UndoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             richTextBox1.Undo();
             undoButton1.IsEnabled = false;
@@ -116,40 +116,35 @@ namespace Test6
             redoButton2.IsEnabled = true;
         }
 
-        public void redoButton1_Click (object sender, EventArgs e)
+        private void RedoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //redo 1 muc
             richTextBox1.Redo();
             undoButton1.IsEnabled = true;
             undoButton2.IsEnabled = true;
             redoButton1.IsEnabled = false;
             redoButton2.IsEnabled = false;
-        } 
+        }
 
         //Cac chuc nang trong RibbonTab GENERAL
 
         //Group ClipBoard
-        public void pasteButton_Click (object sender, EventArgs e)
+
+        private void PasteCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             richTextBox1.Paste();
         }
-       
 
-        public void copyButton_Click (object sender, EventArgs e)
+        private void CutCommandBinding_Executed (object sender, ExecutedRoutedEventArgs e)
+        {
+            richTextBox1.Cut();
+        }
+
+        private void CopyCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             richTextBox1.Copy();
         }
 
         //Group Edit
-        public void undoButton2_Click (object sender, EventArgs e)
-        {
-            richTextBox1.Undo();
-            undoButton1.IsEnabled = false;
-            undoButton2.IsEnabled = false;
-            redoButton1.IsEnabled = true;
-            redoButton2.IsEnabled = true;
-        }
-
         public void redoButton2_Click (object sender, EventArgs e)
         {
             //redo 1 muc
@@ -216,7 +211,7 @@ namespace Test6
                 undoButton1.IsEnabled = true;
                 undoButton2.IsEnabled = true;
 
-                
+                cutButton.IsEnabled = true;
                 copyButton.IsEnabled = true;
                 selectAllButton.IsEnabled = true;
 
@@ -232,7 +227,8 @@ namespace Test6
             {
                 undoButton1.IsEnabled = false;
                 undoButton2.IsEnabled = false;
-                
+
+                cutButton.IsEnabled = false;
                 copyButton.IsEnabled = false;
                 selectAllButton.IsEnabled = false;
 
@@ -245,7 +241,6 @@ namespace Test6
                 speechObject.IsEnabled = false;
             }
         }
-
         
     }
 }

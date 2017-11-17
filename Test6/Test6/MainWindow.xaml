@@ -13,13 +13,24 @@
         <CommandBinding Command="New" Executed="NewCommandBinding_Executed"/>
         <CommandBinding Command="Save" Executed="SaveCommandBinding_Executed"/>
         <CommandBinding Command="SaveAs" Executed="SaveAsCommandBinding_Executed"/>
-        
+        <CommandBinding Command="Paste" Executed="PasteCommandBinding_Executed" />
+        <CommandBinding Command="Cut" Executed="CutCommandBinding_Executed" />
+        <CommandBinding Command="Copy" Executed="CopyCommandBinding_Executed" />
+        <CommandBinding Command="Undo" Executed="UndoCommandBinding_Executed" />
+        <CommandBinding Command="Redo" Executed="RedoCommandBinding_Executed" />
+
+        <CommandBinding Command="local:CustomCommands.Exit" Executed="ExitCommand_Executed" />
     </Window.CommandBindings>
 
     <Window.InputBindings>
         <KeyBinding Key="O" Modifiers="Ctrl" Command="Open" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="New" />
         <KeyBinding Key="S" Modifiers="Ctrl" Command="Save" />
+        <KeyBinding Key="V" Modifiers="Ctrl" Command="Paste" />
+        <KeyBinding Key="X" Modifiers="Ctrl" Command="Cut" />
+        <KeyBinding Key="C" Modifiers="Ctrl" Command="Copy" />
+        <KeyBinding Key="Z" Modifiers="Ctrl" Command="Undo" />
+        <KeyBinding Key="Y" Modifiers="Ctrl" Command="Redo" />
     </Window.InputBindings>
     
     <Grid Margin="0,0,0,0">
@@ -51,24 +62,29 @@
                         Command="SaveAs"/>
                     
                     <RibbonApplicationMenuItem 
-                        x:Name="appExit" Header="Exit" ImageSource ="Resources/EXIT.png"/>
+                        x:Name="appExit" Header="Exit" ImageSource ="Resources/EXIT.png"
+                        Command="local:CustomCommands.Exit"/>
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
             <!--QuickAccessToolbar-->
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
+                    
                     <RibbonButton 
                         x:Name="saveButton1" SmallImageSource="Resources/SAVE.png" KeyTip="S"
                         ToolTipDescription="Save (Ctrl + S)"
                         Command="Save"/>
+                    
                     <RibbonButton 
-                        x:Name="undoButton1" Click="undoButton1_Click" SmallImageSource="Resources/UNDO.png" IsEnabled="False"
-                        ToolTipDescription="Undo Typing (Ctrl + Z)"/>
+                        x:Name="undoButton1" SmallImageSource="Resources/UNDO.png" IsEnabled="False"
+                        ToolTipDescription="Undo Typing (Ctrl + Z)"
+                        Command="Undo"/>
+                    
                     <RibbonButton 
                         x:Name="redoButton1" SmallImageSource="Resources/REDO.png" IsEnabled="False"
                         ToolTipDescription="Redo (Ctrl + Y)"
-                        Click="redoButton1_Click"/>
+                        Command="Redo"/>
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
 
@@ -83,25 +99,32 @@
 
                 <!--RibbonGroup 1: Clipboard-->
                 <RibbonGroup x:Name="CilpboradGroup" Header="Clipboard" ToolTipTitle="Clipboard" ToolTipDescription="See all the item you've copied to the Cipboard">
+                    
                     <RibbonButton 
-                        x:Name="pasteButton" Click="pasteButton_Click" LargeImageSource="Resources/PASTE.png" Label ="Paste" KeyTip="V" 
-                        ToolTipDescription="Add content on the Clipboard to your documents" ToolTipTitle="Paste (Ctrl + V)" ToolTipService.ShowDuration="1000"
-                        />
+                        x:Name="pasteButton" LargeImageSource="Resources/PASTE.png" Label ="Paste" KeyTip="V" 
+                        ToolTipDescription="Add content on the Clipboard to your documents" ToolTipTitle="Paste (Ctrl + V)"
+                        Command="Paste" />
+                    
                     <RibbonButton
                         x:Name="cutButton" SmallImageSource="Resources/CUT.png" 
                         Label="Cut" KeyTip="X" IsEnabled="False" 
                         ToolTipTitle="Cut (Ctrl+X)" ToolTipDescription="Remove the selection and put it on the Clipboard so you can paste it somewhere else "
-                        Command="ApplicationCommands.Cut"/>
+                        Command="Cut"/>
+                    
                     <RibbonButton 
-                        x:Name="copyButton" Click="copyButton_Click" SmallImageSource="Resources/COPY.png" Label="Copy" KeyTip="C" IsEnabled="False" 
-                        ToolTipTitle="Copy (Ctrl+C)" ToolTipDescription="Put a copy of the selection on the Clipboard so you can paste it somewhere else" ToolTipService.ShowDuration="1000"/>
+                        x:Name="copyButton" SmallImageSource="Resources/COPY.png" Label="Copy" KeyTip="C" IsEnabled="False" 
+                        ToolTipTitle="Copy (Ctrl+C)" ToolTipDescription="Put a copy of the selection on the Clipboard so you can paste it somewhere else"
+                        Command="Copy"/>
                 </RibbonGroup>
 
                 <!--RibbonGroup 2: Edits-->
                 <RibbonGroup x:Name="EditsGroup" Header="Edits">
+                    
                     <RibbonButton 
-                        x:Name="undoButton2" Click = "undoButton2_Click" SmallImageSource="Resources/UNDO.png" Label="Undo" IsEnabled="False"
-                        ToolTipTitle="Undo (Ctrl+Z)"/>
+                        x:Name="undoButton2" SmallImageSource="Resources/UNDO.png" Label="Undo" IsEnabled="False"
+                        ToolTipTitle="Undo (Ctrl+Z)"
+                        Command="Undo"/>
+                    
                     <RibbonButton 
                         x:Name="redoButton2" Click="redoButton2_Click" SmallImageSource="Resources/REDO.png" Label="Redo" IsEnabled="False"
                         ToolTipTitle="Redo (Ctrl+Y)"/>
