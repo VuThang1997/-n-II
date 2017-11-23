@@ -30,9 +30,23 @@ namespace Test6
         {
             InitializeComponent();
         }
-       
-        //Cac chuc nang trong ApplicationMenu
-        private void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+
+        
+        //New Command
+        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //xoa sach tat ca moi thu tren richTextBox1
+            richTextBox1.Document.Blocks.Clear();
+        }
+
+        private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            //cho phep chuc nang New duoc su dung bat ki luc nao
+            e.CanExecute = true;
+        }
+        
+        //Open Command
+        private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog openFile = new System.Windows.Forms.OpenFileDialog();
             openFile.Filter = "text files (*.txt)|*.txt|All Files (*.*)|*.*";
@@ -55,16 +69,25 @@ namespace Test6
             }
         }
 
-        private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void OpenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            //cho phep chuc nang Open duoc su dung bat ki luc nao
+            e.CanExecute = true;
+        }
+
+        //Close Command
+        private void CloseCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void CloseCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            richTextBox1.Document.Blocks.Clear();
+            //cho phep chuc nang Close duoc su dung bat ki luc nao
+            e.CanExecute = true;
         }
 
+        //saveAs Func, su dung cho SaveAsCommand va SaveCommand
         private void saveAsFunc()
         {
             System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -82,7 +105,8 @@ namespace Test6
             }
         }
 
-        private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        //Save Command
+        private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (!File.Exists(pathFile))
             {
@@ -100,95 +124,76 @@ namespace Test6
             }
         }
 
-        private void SaveAsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            //cho phep chuc nang Save duoc su dung bat ki luc nao
+            e.CanExecute = true;
+        }
+
+        //SaveAs Command
+        private void SaveAsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             saveAsFunc();
         }
 
-        //Cac chuc nang trong QuickAccessToolbar
-
-        private void UndoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void SaveAsCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            richTextBox1.Undo();
-            undoButton1.IsEnabled = false;
-            undoButton2.IsEnabled = false;
-            redoButton1.IsEnabled = true;
-            redoButton2.IsEnabled = true;
+            //cho phep chuc nang Save duoc su dung bat ki luc nao
+            e.CanExecute = true;
         }
 
-        private void RedoCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            richTextBox1.Redo();
-            undoButton1.IsEnabled = true;
-            undoButton2.IsEnabled = true;
-            redoButton1.IsEnabled = false;
-            redoButton2.IsEnabled = false;
-        }
-
-        //Cac chuc nang trong RibbonTab GENERAL
-
-        //Group ClipBoard
-
-        private void PasteCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            richTextBox1.Paste();
-        }
-
-        private void CutCommandBinding_Executed (object sender, ExecutedRoutedEventArgs e)
-        {
-            richTextBox1.Cut();
-        }
-
-        private void CopyCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            richTextBox1.Copy();
-        }
-
-        //Group Edit
-        public void redoButton2_Click (object sender, EventArgs e)
-        {
-            //redo 1 muc
-            richTextBox1.Redo();
-            undoButton1.IsEnabled = true;
-            undoButton2.IsEnabled = true;
-            redoButton1.IsEnabled = false;
-            redoButton2.IsEnabled = false;
-        }
-
-        private void selectAllButton_Click(object sender, RoutedEventArgs e)
-        {
-            richTextBox1.SelectAll();
-        }
-
-        //Group Font
-        private void boldButton_Click(object sender, RoutedEventArgs e)
+        //Bold Command
+        private void BoldCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //thay doi thuoc tinh FontWeight cua doan text duoc chon thanh Bold
-            richTextBox1.Selection.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
+            richTextBox1.Selection.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);           
         }
 
-        private void italicButton_Click(object sender, RoutedEventArgs e)
+        private void BoldCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            // thay doi thuoc tinh FontWeight cua doan text duoc chon thanh Italic
+            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
+        }
+
+        //Italic Command
+        private void ItalicCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            // thay doi thuoc tinh FontStyles cua doan text duoc chon thanh Italic
             richTextBox1.Selection.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Italic);
         }
 
-        private void underlineButton_Click(object sender, RoutedEventArgs e)
+        private void ItalicCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
+        }
+
+        //Underline Command
+        private void UnderlineCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             // thay doi thuoc tinh TextDecorations cua doan text duoc chon thanh Underline
             richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Underline);
         }
 
-        private void strikeButton_Click(object sender, RoutedEventArgs e)
+        private void UnderlineCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
+        }
+
+        //Strikethrough Command
+        private void StrikeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             // thay doi thuoc tinh TextDecorations cua doan text duoc chon thanh Strikethrough
             richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
         }
 
-        //Cac chuc nang trong RibbonTab ADVANCED
-        public void speechObject_Click(object sender, EventArgs e)
+        private void StrikeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            SpeechSynthesizer synth = new SpeechSynthesizer(); 
+            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
+        }
+
+        //SpeechSynthesizer Command
+        private void SpeechCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            SpeechSynthesizer synth = new SpeechSynthesizer();
             synth.SetOutputToDefaultAudioDevice();
 
             //lay noi dung ghi tren richTextBox1
@@ -196,51 +201,20 @@ namespace Test6
             synth.Speak(content);
         }
 
-        public void dateTime_Click (object sender, EventArgs e)
+        private void SpeechCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (richTextBox1 != null);
+        }
+
+        //DateTime Command
+        private void DateCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             richTextBox1.Document.Blocks.Add(new Paragraph(new Run(" " + DateTime.Now)));
         }
 
-        //xu ly su kien TextChanged trong richTextBox1
-        private void richTextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        private void DateCommand_CanExecute (object sender, CanExecuteRoutedEventArgs e)
         {
-            TextRange range = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
-            
-            if (range.Text.Length > 0)
-            {
-                undoButton1.IsEnabled = true;
-                undoButton2.IsEnabled = true;
-
-                cutButton.IsEnabled = true;
-                copyButton.IsEnabled = true;
-                selectAllButton.IsEnabled = true;
-
-                boldButton.IsEnabled = true;
-                italicButton.IsEnabled = true;
-                underlineButton.IsEnabled = true;
-                strikeButton.IsEnabled = true;
-                deleteButton.IsEnabled = true;
-
-                speechObject.IsEnabled = true;
-            }
-            else
-            {
-                undoButton1.IsEnabled = false;
-                undoButton2.IsEnabled = false;
-
-                cutButton.IsEnabled = false;
-                copyButton.IsEnabled = false;
-                selectAllButton.IsEnabled = false;
-
-                boldButton.IsEnabled = false;
-                italicButton.IsEnabled = false;
-                underlineButton.IsEnabled = false;
-                strikeButton.IsEnabled = false;
-                deleteButton.IsEnabled = false;
-
-                speechObject.IsEnabled = false;
-            }
+            e.CanExecute = true;
         }
-        
     }
 }

@@ -1,61 +1,62 @@
 ﻿<RibbonWindow
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Test6"
-        xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="Test6.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Test6"
+    x:Class="Test6.MainWindow"
         mc:Ignorable="d"
         Title="MyNotepad" Height="450" Width="450">
 
     <Window.CommandBindings>
-        <CommandBinding Command="Open" Executed="OpenCommandBinding_Executed" />
-        <CommandBinding Command="New" Executed="NewCommandBinding_Executed"/>
-        <CommandBinding Command="Save" Executed="SaveCommandBinding_Executed"/>
-        <CommandBinding Command="SaveAs" Executed="SaveAsCommandBinding_Executed"/>
-        <CommandBinding Command="Paste" Executed="PasteCommandBinding_Executed" />
-        <CommandBinding Command="Cut" Executed="CutCommandBinding_Executed" />
-        <CommandBinding Command="Copy" Executed="CopyCommandBinding_Executed" />
-        <CommandBinding Command="Undo" Executed="UndoCommandBinding_Executed" />
-        <CommandBinding Command="Redo" Executed="RedoCommandBinding_Executed" />
+        <!--Cac command da duoc dinh nghia san-->
+        <CommandBinding Command = "ApplicationCommands.New"       Executed = "NewCommand_Executed"      CanExecute="NewCommand_CanExecute"  />
+        <CommandBinding Command = "ApplicationCommands.Open"      Executed = "OpenCommand_Executed"     CanExecute="OpenCommand_CanExecute"/>
+        <CommandBinding Command = "ApplicationCommands.Save"      Executed = "SaveCommand_Executed"     CanExecute="SaveCommand_CanExecute"/>
+        <CommandBinding Command = "ApplicationCommands.SaveAs"    Executed = "SaveAsCommand_Executed"   CanExecute="SaveAsCommand_CanExecute"/>
+        <CommandBinding Command = "ApplicationCommands.Close"     Executed = "CloseCommand_Executed"    CanExecute="CloseCommand_CanExecute"/>
+        <CommandBinding Command = "ApplicationCommands.Paste"/>
+        <CommandBinding Command = "ApplicationCommands.Cut"  />
+        <CommandBinding Command = "ApplicationCommands.Copy" />
+        <CommandBinding Command = "ApplicationCommands.Undo" />
+        <CommandBinding Command = "ApplicationCommands.Redo" />
+        <CommandBinding Command = "ApplicationCommands.SelectAll" />
+        
+        <!--Cac command tu dinh nghia-->
+        <CommandBinding Command="local:CustomCommands.Bold"           Executed="BoldCommand_Executed"         CanExecute="BoldCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Italic"         Executed="ItalicCommand_Executed"       CanExecute="ItalicCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Underline"      Executed="UnderlineCommand_Executed"    CanExecute="UnderlineCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Speech"         Executed="SpeechCommand_Executed"       CanExecute="SpeechCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Date"           Executed="DateCommand_Executed"         CanExecute="DateCommand_CanExecute"/>
 
-        <CommandBinding Command="local:CustomCommands.Exit" Executed="ExitCommand_Executed" />
     </Window.CommandBindings>
 
-    <Window.InputBindings>
-        <KeyBinding Key="O" Modifiers="Ctrl" Command="Open" />
-        <KeyBinding Key="N" Modifiers="Ctrl" Command="New" />
-        <KeyBinding Key="S" Modifiers="Ctrl" Command="Save" />
-        <KeyBinding Key="V" Modifiers="Ctrl" Command="Paste" />
-        <KeyBinding Key="X" Modifiers="Ctrl" Command="Cut" />
-        <KeyBinding Key="C" Modifiers="Ctrl" Command="Copy" />
-        <KeyBinding Key="Z" Modifiers="Ctrl" Command="Undo" />
-        <KeyBinding Key="Y" Modifiers="Ctrl" Command="Redo" />
-    </Window.InputBindings>
-    
     <Grid Margin="0,0,0,0">
+        
+        <!--Dinh nghia so luong va kich thuoc cac hang tren grid-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <!-- Design ribbon-->
         <Ribbon x:Name="ribbon" Width="Auto">
 
-            <!-- Application Menu -->
+            <!-- Application Menu: chua cac item New, Open, Save, SaveAs, Exit -->
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu>
                     
                     <RibbonApplicationMenuItem 
                         x:Name="appNew" Header="New" ImageSource ="Resources/NEW.png" KeyTip="N"
-                        InputGestureText="Ctrl+N" Command="New" />
+                        Command="ApplicationCommands.New"/>
 
                     <RibbonApplicationMenuItem 
                         x:Name="appOpen" Header="Open" ImageSource ="Resources/OPEN.png" KeyTip="O"
-                        InputGestureText="Ctrl+O" Command="Open" />
+                        Command="ApplicationCommands.Open"/>
 
                     <RibbonApplicationMenuItem 
                         x:Name="appSave" Header="Save" ImageSource ="Resources/SAVE.png" KeyTip="S"
-                        InputGestureText="Ctrl+S" Command="Save"/>
+                        Command="ApplicationCommands.Save"/>
                     
                     <RibbonApplicationMenuItem 
                         x:Name="appSaveAs" Header="Save As" ImageSource ="Resources/SAVE AS.png"
@@ -63,28 +64,28 @@
                     
                     <RibbonApplicationMenuItem 
                         x:Name="appExit" Header="Exit" ImageSource ="Resources/EXIT.png"
-                        Command="local:CustomCommands.Exit"/>
+                        Command="ApplicationCommands.Close"/>
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
-            <!--QuickAccessToolbar-->
+            <!--QuickAccessToolbar: chua cac button Save, Undo, Redo-->
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
                     
                     <RibbonButton 
                         x:Name="saveButton1" SmallImageSource="Resources/SAVE.png" KeyTip="S"
                         ToolTipDescription="Save (Ctrl + S)"
-                        Command="Save"/>
+                        Command="ApplicationCommands.Save"/>
                     
                     <RibbonButton 
-                        x:Name="undoButton1" SmallImageSource="Resources/UNDO.png" IsEnabled="False"
+                        x:Name="undoButton1" SmallImageSource="Resources/UNDO.png"
                         ToolTipDescription="Undo Typing (Ctrl + Z)"
-                        Command="Undo"/>
+                        Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=richTextBox1}"/>
                     
                     <RibbonButton 
-                        x:Name="redoButton1" SmallImageSource="Resources/REDO.png" IsEnabled="False"
+                        x:Name="redoButton1" SmallImageSource="Resources/REDO.png"
                         ToolTipDescription="Redo (Ctrl + Y)"
-                        Command="Redo"/>
+                        Command="ApplicationCommands.Redo" CommandTarget="{Binding ElementName=richTextBox1}"/>
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
 
@@ -94,61 +95,80 @@
                     x:Name="helpButton" SmallImageSource="Resources/HELP.png"/>
             </Ribbon.HelpPaneContent>
 
-            <!-- RibbonTab 1: GENERAL-->
+            <!-- RibbonTab 1: GENERAL chua cac ribbon group Clipboard, Edit, Font-->
             <RibbonTab Header="GENERAL">
 
-                <!--RibbonGroup 1: Clipboard-->
-                <RibbonGroup x:Name="CilpboradGroup" Header="Clipboard" ToolTipTitle="Clipboard" ToolTipDescription="See all the item you've copied to the Cipboard">
+                <!--RibbonGroup 1: Clipboard co cac chuc nang Paste, Copy, Cut-->
+                <RibbonGroup x:Name="CilpboradGroup" Header="Clipboard" 
+                             ToolTipTitle="Clipboard" 
+                             ToolTipDescription="See all the item you've copied to the Cipboard">
                     
                     <RibbonButton 
                         x:Name="pasteButton" LargeImageSource="Resources/PASTE.png" Label ="Paste" KeyTip="V" 
-                        ToolTipDescription="Add content on the Clipboard to your documents" ToolTipTitle="Paste (Ctrl + V)"
-                        Command="Paste" />
+                        ToolTipDescription="Add content on the Clipboard to your documents" 
+                        ToolTipTitle="Paste (Ctrl + V)"
+                        Command="ApplicationCommands.Paste" CommandTarget="{Binding ElementName=richTextBox1}" />
                     
                     <RibbonButton
-                        x:Name="cutButton" SmallImageSource="Resources/CUT.png" 
-                        Label="Cut" KeyTip="X" IsEnabled="False" 
-                        ToolTipTitle="Cut (Ctrl+X)" ToolTipDescription="Remove the selection and put it on the Clipboard so you can paste it somewhere else "
-                        Command="Cut"/>
-                    
+                        x:Name="cutButton" SmallImageSource="Resources/CUT.png" Label="Cut" KeyTip="X"
+                        ToolTipTitle="Cut (Ctrl+X)" 
+                        ToolTipDescription="Remove the selection and put it
+                                            on the Clipboard so you can paste it somewhere else "
+                        Command="ApplicationCommands.Cut" CommandTarget="{Binding ElementName=richTextBox1}"/>
+
                     <RibbonButton 
-                        x:Name="copyButton" SmallImageSource="Resources/COPY.png" Label="Copy" KeyTip="C" IsEnabled="False" 
-                        ToolTipTitle="Copy (Ctrl+C)" ToolTipDescription="Put a copy of the selection on the Clipboard so you can paste it somewhere else"
-                        Command="Copy"/>
+                        x:Name="copyButton" SmallImageSource="Resources/COPY.png" Label="Copy" KeyTip="C"
+                        ToolTipTitle="Copy (Ctrl+C)" 
+                        ToolTipDescription="Put a copy of the selection on the Clipboard so 
+                                            you can paste it somewhere else"
+                        Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=richTextBox1}"/>
                 </RibbonGroup>
 
-                <!--RibbonGroup 2: Edits-->
-                <RibbonGroup x:Name="EditsGroup" Header="Edits">
+                <!--RibbonGroup 2: Edit chua cac button Undo, Redo, SelectAll -->
+                <RibbonGroup x:Name="EditGroup" Header="Edit">
                     
                     <RibbonButton 
-                        x:Name="undoButton2" SmallImageSource="Resources/UNDO.png" Label="Undo" IsEnabled="False"
+                        x:Name="undoButton2" SmallImageSource="Resources/UNDO.png" Label="Undo"
                         ToolTipTitle="Undo (Ctrl+Z)"
-                        Command="Undo"/>
+                        Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=richTextBox1}"/>
                     
                     <RibbonButton 
-                        x:Name="redoButton2" Click="redoButton2_Click" SmallImageSource="Resources/REDO.png" Label="Redo" IsEnabled="False"
-                        ToolTipTitle="Redo (Ctrl+Y)"/>
+                        x:Name="redoButton2" SmallImageSource="Resources/REDO.png" Label="Redo"
+                        ToolTipTitle="Redo (Ctrl+Y)"
+                        Command="ApplicationCommands.Redo" CommandTarget="{Binding ElementName=richTextBox1}"/>
+
                     <RibbonButton 
-                        x:Name="selectAllButton" Click="selectAllButton_Click" SmallImageSource="Resources/SELECT ALL.png" Label="Select All" IsEnabled="False"
-                        ToolTipTitle="Select All (Ctrl+A)" ToolTipDescription="Select all text"/>
+                        x:Name="selectAllButton" SmallImageSource="Resources/SELECT ALL.png" Label="Select All"
+                        ToolTipTitle="Select All (Ctrl+A)" ToolTipDescription="Select all text"
+                        Command="ApplicationCommands.SelectAll" CommandTarget="{Binding ElementName=richTextBox1}"/>
                 </RibbonGroup>
 
-                <!-- RibbonGroup 3: Font -->
+                <!-- RibbonGroup 3: Font chua cac button Bold, Italic, Underlined, StrikeThrough-->
                 <RibbonGroup x:Name="FontGroup" Header="Font">
+                    
                     <RibbonButton 
-                        x:Name="boldButton" Click="boldButton_Click" LargeImageSource="Resources/BOLD.png" Label ="Bold" KeyTip="B" IsEnabled="False"
-                        ToolTipTitle="Bold (Ctrl+B)" ToolTipDescription="Make your text bold"/>
+                        x:Name="boldButton" LargeImageSource="Resources/BOLD.png" Label ="Bold" KeyTip="B"
+                        ToolTipTitle="Bold (Ctrl+B)" ToolTipDescription="Make your text bold"
+                        Command="local:CustomCommands.Bold"/>
+                    
                     <RibbonButton 
-                        x:Name="italicButton" Click="italicButton_Click" LargeImageSource="Resources/ITALIC.png" Label ="Italic" KeyTip="I" IsEnabled="False"
-                        ToolTipTitle="Italic (Ctrl+I)" ToolTipDescription="Italicize your text"/>
+                        x:Name="italicButton" LargeImageSource="Resources/ITALIC.png" Label ="Italic" KeyTip="I"
+                        ToolTipTitle="Italic (Ctrl+I)" ToolTipDescription="Italicize your text"
+                        Command="local:CustomCommands.Italic"/>
+                    
                     <RibbonButton 
-                        x:Name="underlineButton" LargeImageSource="Resources/UNDERLINE.png" Label ="Underline" KeyTip="U" IsEnabled="False" Click="underlineButton_Click"
-                        ToolTipTitle="Underline (Ctrl+U)" ToolTipDescription="Underlines your text"/>
+                        x:Name="underlineButton" LargeImageSource="Resources/UNDERLINE.png" Label ="Underline" KeyTip="U"
+                        ToolTipTitle="Underline (Ctrl+U)" ToolTipDescription="Underlines your text"
+                        Command="local:CustomCommands.Underline"/>
+                    
                     <RibbonButton 
-                        x:Name="strikeButton" SmallImageSource="Resources/STRIKE_THROUGH.png" Label="Strike Through" IsEnabled="False" Click="strikeButton_Click"
-                        ToolTipTitle="Strikethrough" ToolTipDescription="Cross something out by drawing a line through it"/>
+                        x:Name="strikeButton" SmallImageSource="Resources/STRIKE_THROUGH.png" Label="Strike Through"
+                        ToolTipTitle="Strikethrough" ToolTipDescription="Cross something out by drawing a line through it"
+                        Command="local:CustomCommands.Strike"/>
+                    
                     <RibbonButton 
                         x:Name="deleteButton" SmallImageSource="Resources/DELETE.png" Label="Delete" IsEnabled="False"/>
+                    
                     <RibbonButton 
                         x:Name="textColorButton" SmallImageSource="Resources/TEXT COLOR.png" Label="Text Color" IsEnabled="False"
                         ToolTipTitle="Text Color" ToolTipDescription="Change the color of your text"/>
@@ -159,31 +179,34 @@
             <!--RibbonTab 2: ADVANCED-->
             <RibbonTab Header="ADVANCED">
 
-                <!--Group 1-->
+                <!--Group 1 chua button Speech Synthesizer-->
                 <RibbonGroup >
                     <RibbonButton 
-                        x:Name="speechObject" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer" Click="speechObject_Click" IsEnabled="False" ToolTipDescription="Heelo"/>
+                        x:Name="speechSynthesizer" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer"
+                        ToolTipDescription="Text-to-speech"
+                        Command="local:CustomCommands.Speech"/>
                 </RibbonGroup>
 
                 <!--Group 2-->
                 <RibbonGroup >
-                    <RibbonButton x:Name="dateTime" Click="dateTime_Click" LargeImageSource="Resources/DATE.png" Label="Date/Time"/>
-                </RibbonGroup>
-
-                <!--Group 3-->
-                <RibbonGroup >
-                    <RibbonCheckBox x:Name="autoComplete" Label="AutoCompleteBarracks" IsChecked="False"/>
+                    <RibbonButton 
+                        x:Name="dateTime" LargeImageSource="Resources/DATE.png" Label="Date/Time"
+                        ToolTipDescription="Adding system's time"
+                        Command="local:CustomCommands.Date"/>
                 </RibbonGroup>
 
             </RibbonTab>
         </Ribbon>
+        
+        <!-- control richTextBox1 de nhap van ban-->
         <RichTextBox 
-            x:Name="richTextBox1" Grid.Row="1" Margin="10,10,10,10" TextChanged="richTextBox1_TextChanged" BorderBrush="#FFABB3AB">
+            x:Name="richTextBox1" Grid.Row="1" Margin="10,10,10,10" BorderBrush="#FFABB3AB">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
                 </Style>
             </RichTextBox.Resources>
         </RichTextBox>
+        
     </Grid>
 </RibbonWindow>
