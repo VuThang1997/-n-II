@@ -9,26 +9,6 @@ namespace Test6
 {
     public partial class CustomCommands
     {
-        //Bold Command
-        public static RoutedCommand Bold = new RoutedCommand("Bold", typeof(CustomCommands),
-                                            new InputGestureCollection()
-                                            {
-                                                new KeyGesture(Key.B, ModifierKeys.Control)
-                                            });
-
-        //Italic Command
-        public static RoutedCommand Italic = new RoutedCommand("Italic", typeof(CustomCommands),
-                                            new InputGestureCollection()
-                                            {
-                                                new KeyGesture(Key.I, ModifierKeys.Control)
-                                            });
-
-        //Underline Command
-        public static RoutedCommand Underline = new RoutedCommand("Underline", typeof(CustomCommands),
-                                            new InputGestureCollection()
-                                            {
-                                                new KeyGesture(Key.U, ModifierKeys.Control)
-                                            });
         //Strikethrough Command
         public static RoutedCommand Strike = new RoutedCommand("Strikethrough", typeof(CustomCommands));
 

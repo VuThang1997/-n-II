@@ -29,8 +29,9 @@ namespace Test6
         public MainWindow()
         {
             InitializeComponent();
+            cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
+            cmbFontSize.ItemsSource = new List<Double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
         }
-
         
         //New Command
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -142,47 +143,24 @@ namespace Test6
             e.CanExecute = true;
         }
 
-        //Bold Command
-        private void BoldCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            //thay doi thuoc tinh FontWeight cua doan text duoc chon thanh Bold
-            richTextBox1.Selection.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);           
-        }
-
-        private void BoldCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
-        }
-
-        //Italic Command
-        private void ItalicCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            // thay doi thuoc tinh FontStyles cua doan text duoc chon thanh Italic
-            richTextBox1.Selection.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Italic);
-        }
-
-        private void ItalicCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
-        }
-
-        //Underline Command
-        private void UnderlineCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            // thay doi thuoc tinh TextDecorations cua doan text duoc chon thanh Underline
-            richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Underline);
-        }
-
-        private void UnderlineCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
-        }
-
         //Strikethrough Command
         private void StrikeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            // thay doi thuoc tinh TextDecorations cua doan text duoc chon thanh Strikethrough
-            richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
+            TextDecorationCollection decs = (TextDecorationCollection)richTextBox1.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            if (decs.Contains(TextDecorations.Strikethrough[0]))
+            {
+                //neu doan text duoc chon da duoc gach giua thi xoa chuc nang nay
+                TextDecorationCollection noStrike = new TextDecorationCollection(decs);
+                noStrike.Remove(TextDecorations.Strikethrough[0]);
+                richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, noStrike);
+            }
+            else
+            {
+                //neu doan text duoc chon chua duoc gach giua thi thuc hien chuc nang
+                TextDecorationCollection addStrike = new TextDecorationCollection(decs);
+                addStrike.Add(TextDecorations.Strikethrough[0]);
+                richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, addStrike);
+            }
         }
 
         private void StrikeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -216,5 +194,21 @@ namespace Test6
         {
             e.CanExecute = true;
         }
+        /*
+        private void cmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbFontFamily.SelectedItem != null)
+            {
+                richTextBox1.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, cmbFontFamily.SelectedItem);
+            }
+        }
+
+        private void cmbFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbFontSize.SelectedItem != null)
+            {
+                richTextBox1.Selection.ApplyPropertyValue(Inline.FontSizeProperty, cmbFontSize.Text);
+            }
+        }*/
     }
 }

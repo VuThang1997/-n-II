@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Test6"
     x:Class="Test6.MainWindow"
         mc:Ignorable="d"
-        Title="MyNotepad" Height="450" Width="450">
+        Title="MyNotepad" Height="450" Width="600">
 
     <Window.CommandBindings>
         <!--Cac command da duoc dinh nghia san-->
@@ -23,9 +23,7 @@
         <CommandBinding Command = "ApplicationCommands.SelectAll" />
         
         <!--Cac command tu dinh nghia-->
-        <CommandBinding Command="local:CustomCommands.Bold"           Executed="BoldCommand_Executed"         CanExecute="BoldCommand_CanExecute"/>
-        <CommandBinding Command="local:CustomCommands.Italic"         Executed="ItalicCommand_Executed"       CanExecute="ItalicCommand_CanExecute"/>
-        <CommandBinding Command="local:CustomCommands.Underline"      Executed="UnderlineCommand_Executed"    CanExecute="UnderlineCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Strike"         Executed="StrikeCommand_Executed"       CanExecute="StrikeCommand_CanExecute" />
         <CommandBinding Command="local:CustomCommands.Speech"         Executed="SpeechCommand_Executed"       CanExecute="SpeechCommand_CanExecute"/>
         <CommandBinding Command="local:CustomCommands.Date"           Executed="DateCommand_Executed"         CanExecute="DateCommand_CanExecute"/>
 
@@ -144,39 +142,42 @@
                 </RibbonGroup>
 
                 <!-- RibbonGroup 3: Font chua cac button Bold, Italic, Underlined, StrikeThrough-->
-                <RibbonGroup x:Name="FontGroup" Header="Font">
-                    
-                    <RibbonButton 
+                <RibbonGroup x:Name="FontGroup" Header="Font" Margin="0,1" Width="257">
+
+                    <RibbonToggleButton
                         x:Name="boldButton" LargeImageSource="Resources/BOLD.png" Label ="Bold" KeyTip="B"
                         ToolTipTitle="Bold (Ctrl+B)" ToolTipDescription="Make your text bold"
-                        Command="local:CustomCommands.Bold"/>
-                    
-                    <RibbonButton 
+                        Command="EditingCommands.ToggleBold"/>
+
+                    <RibbonToggleButton
                         x:Name="italicButton" LargeImageSource="Resources/ITALIC.png" Label ="Italic" KeyTip="I"
                         ToolTipTitle="Italic (Ctrl+I)" ToolTipDescription="Italicize your text"
-                        Command="local:CustomCommands.Italic"/>
-                    
-                    <RibbonButton 
+                        Command="EditingCommands.ToggleItalic"/>
+
+                    <RibbonToggleButton
                         x:Name="underlineButton" LargeImageSource="Resources/UNDERLINE.png" Label ="Underline" KeyTip="U"
                         ToolTipTitle="Underline (Ctrl+U)" ToolTipDescription="Underlines your text"
-                        Command="local:CustomCommands.Underline"/>
-                    
+                        Command="EditingCommands.ToggleUnderline"/>
+
                     <RibbonButton 
                         x:Name="strikeButton" SmallImageSource="Resources/STRIKE_THROUGH.png" Label="Strike Through"
                         ToolTipTitle="Strikethrough" ToolTipDescription="Cross something out by drawing a line through it"
                         Command="local:CustomCommands.Strike"/>
-                    
+
                     <RibbonButton 
                         x:Name="deleteButton" SmallImageSource="Resources/DELETE.png" Label="Delete" IsEnabled="False"/>
-                    
+
                     <RibbonButton 
                         x:Name="textColorButton" SmallImageSource="Resources/TEXT COLOR.png" Label="Text Color" IsEnabled="False"
                         ToolTipTitle="Text Color" ToolTipDescription="Change the color of your text"/>
 
+                    <RibbonComboBox x:Name="cmbFontFamily" Margin="0,0,-44,0" />
+
+                    <RibbonComboBox x:Name="cmbFontSize" Margin="0,0,-22,0"/>
                 </RibbonGroup>
             </RibbonTab>
 
-            <!--RibbonTab 2: ADVANCED-->
+            <!--RibbonTab 2: ADVANCED chua cac 2 RibbonGroup; moi Group chua 1 button chuc nang-->
             <RibbonTab Header="ADVANCED">
 
                 <!--Group 1 chua button Speech Synthesizer-->
