@@ -31,6 +31,7 @@ namespace Test6
             InitializeComponent();
             cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             cmbFontSize.ItemsSource = new List<Double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            richTextBox1.Document.PageWidth = 1000;
         }
         
         //New Command
@@ -146,19 +147,25 @@ namespace Test6
         //Strikethrough Command
         private void StrikeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            //lay ra bo gia tri TextDecoration cua doan text duoc chon
             TextDecorationCollection decs = (TextDecorationCollection)richTextBox1.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
-            if (decs.Contains(TextDecorations.Strikethrough[0]))
+
+            if (decs.Contains(TextDecorations.Strikethrough[0]) == true) 
             {
-                //neu doan text duoc chon da duoc gach giua thi xoa chuc nang nay
+                //neu doan text duoc chon da duoc gach giua thi xoa thiet lap nay
                 TextDecorationCollection noStrike = new TextDecorationCollection(decs);
                 noStrike.Remove(TextDecorations.Strikethrough[0]);
+
                 richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, noStrike);
+                
             }
+            //else if ((decs.Contains(TextDecorations.Strikethrough[0]) == false) || (richTextBox1.Selection.GetPropertyValue(Inline.TextDecorationsProperty) == DependencyProperty.UnsetValue))
             else
             {
                 //neu doan text duoc chon chua duoc gach giua thi thuc hien chuc nang
                 TextDecorationCollection addStrike = new TextDecorationCollection(decs);
                 addStrike.Add(TextDecorations.Strikethrough[0]);
+
                 richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, addStrike);
             }
         }
@@ -166,6 +173,42 @@ namespace Test6
         private void StrikeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
+        }
+
+        //Clear Formatting Command
+        private void ClearCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (richTextBox1 != null) && (richTextBox1.Selection.IsEmpty == false);
+        }
+
+        private void ClearCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //xoa cac thiet lap TextDecorations
+            richTextBox1.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, null);
+
+            //xoa thiet lap chu dam
+            richTextBox1.Selection.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Normal);
+
+            //xoa thiet lap chu nghieng
+            richTextBox1.Selection.ApplyPropertyValue(TextElement.FontStyleProperty, FontStyles.Normal);
+        }
+
+        //FontSize SelectionChanged
+        private void cmbFontSize_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (cmbFontSize.SelectedItem != null)
+            {
+                richTextBox1.Selection.ApplyPropertyValue(Inline.FontSizeProperty, cmbFontSize.Text);
+            }
+        }
+
+        //FontFamily_SelectionChanged
+        private void cmbFontFamily_SelectionChanged (object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbFontFamily.SelectedItem != null)
+            {
+                richTextBox1.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, cmbFontFamily.SelectedItem);
+            }
         }
 
         //SpeechSynthesizer Command
@@ -194,21 +237,31 @@ namespace Test6
         {
             e.CanExecute = true;
         }
-        /*
-        private void cmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cmbFontFamily.SelectedItem != null)
-            {
-                richTextBox1.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, cmbFontFamily.SelectedItem);
-            }
-        }
 
-        private void cmbFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //richTextBox1 SelectionChanged
+        private void richTextBox1_SelectionChanged (object sender, RoutedEventArgs e)
         {
-            if (cmbFontSize.SelectedItem != null)
-            {
-                richTextBox1.Selection.ApplyPropertyValue(Inline.FontSizeProperty, cmbFontSize.Text);
-            }
-        }*/
+            object temp;
+
+            //dieu khien trang thai cua boldButton
+            temp = richTextBox1.Selection.GetPropertyValue(Inline.FontWeightProperty);
+            boldButton.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontWeights.Bold));
+
+            //dieu khien trang thai cua italicdButton
+            temp = richTextBox1.Selection.GetPropertyValue(Inline.FontStyleProperty);
+            italicButton.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontStyles.Italic));
+
+            //dieu khien trang thai cua underlineButton
+            temp = richTextBox1.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            underlineButton.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(TextDecorations.Underline));
+
+            //hien thi FontFamily cua doan duoc chon
+            temp = richTextBox1.Selection.GetPropertyValue(Inline.FontFamilyProperty);
+            cmbFontFamily.SelectedItem = temp;
+
+            //hien thi FontSize cua doan duoc chon
+            temp = richTextBox1.Selection.GetPropertyValue(Inline.FontSizeProperty);
+            cmbFontSize.SelectedItem = temp;
+        }
     }
 }

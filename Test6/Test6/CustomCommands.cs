@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Test6
 {
-    public partial class CustomCommands
+    public static class CustomCommands
     {
         //Strikethrough Command
         public static RoutedCommand Strike = new RoutedCommand("Strikethrough", typeof(CustomCommands));
@@ -17,5 +17,8 @@ namespace Test6
 
         //DateTime Command
         public static RoutedCommand Date = new RoutedCommand("Date/Time", typeof(CustomCommands));
+
+        //ClearFormat Command
+        public static RoutedCommand Clear = new RoutedCommand("Clear Formatting", typeof(CustomCommands));
     }
 }

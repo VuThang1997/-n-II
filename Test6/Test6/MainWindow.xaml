@@ -11,21 +11,16 @@
     <Window.CommandBindings>
         <!--Cac command da duoc dinh nghia san-->
         <CommandBinding Command = "ApplicationCommands.New"       Executed = "NewCommand_Executed"      CanExecute="NewCommand_CanExecute"  />
-        <CommandBinding Command = "ApplicationCommands.Open"      Executed = "OpenCommand_Executed"     CanExecute="OpenCommand_CanExecute"/>
+        <CommandBinding Command = "ApplicationCommands.Open"      Executed = "OpenCommand_Executed"     CanExecute="OpenCommand_CanExecute"/> 
         <CommandBinding Command = "ApplicationCommands.Save"      Executed = "SaveCommand_Executed"     CanExecute="SaveCommand_CanExecute"/>
         <CommandBinding Command = "ApplicationCommands.SaveAs"    Executed = "SaveAsCommand_Executed"   CanExecute="SaveAsCommand_CanExecute"/>
         <CommandBinding Command = "ApplicationCommands.Close"     Executed = "CloseCommand_Executed"    CanExecute="CloseCommand_CanExecute"/>
-        <CommandBinding Command = "ApplicationCommands.Paste"/>
-        <CommandBinding Command = "ApplicationCommands.Cut"  />
-        <CommandBinding Command = "ApplicationCommands.Copy" />
-        <CommandBinding Command = "ApplicationCommands.Undo" />
-        <CommandBinding Command = "ApplicationCommands.Redo" />
-        <CommandBinding Command = "ApplicationCommands.SelectAll" />
         
         <!--Cac command tu dinh nghia-->
-        <CommandBinding Command="local:CustomCommands.Strike"         Executed="StrikeCommand_Executed"       CanExecute="StrikeCommand_CanExecute" />
-        <CommandBinding Command="local:CustomCommands.Speech"         Executed="SpeechCommand_Executed"       CanExecute="SpeechCommand_CanExecute"/>
-        <CommandBinding Command="local:CustomCommands.Date"           Executed="DateCommand_Executed"         CanExecute="DateCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Strike"     Executed="StrikeCommand_Executed"     CanExecute="StrikeCommand_CanExecute" />
+        <CommandBinding Command="local:CustomCommands.Speech"     Executed="SpeechCommand_Executed"     CanExecute="SpeechCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Date"       Executed="DateCommand_Executed"       CanExecute="DateCommand_CanExecute"/>
+        <CommandBinding Command="local:CustomCommands.Clear"      Executed="ClearCommand_Executed"      CanExecute="ClearCommand_CanExecute" />
 
     </Window.CommandBindings>
 
@@ -36,7 +31,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Design ribbon-->
         <Ribbon x:Name="ribbon" Width="Auto">
 
@@ -147,17 +142,17 @@
                     <RibbonToggleButton
                         x:Name="boldButton" LargeImageSource="Resources/BOLD.png" Label ="Bold" KeyTip="B"
                         ToolTipTitle="Bold (Ctrl+B)" ToolTipDescription="Make your text bold"
-                        Command="EditingCommands.ToggleBold"/>
+                        Command="EditingCommands.ToggleBold" CommandTarget="{Binding ElementName=richTextBox1}"/>
 
                     <RibbonToggleButton
                         x:Name="italicButton" LargeImageSource="Resources/ITALIC.png" Label ="Italic" KeyTip="I"
                         ToolTipTitle="Italic (Ctrl+I)" ToolTipDescription="Italicize your text"
-                        Command="EditingCommands.ToggleItalic"/>
+                        Command="EditingCommands.ToggleItalic" CommandTarget="{Binding ElementName=richTextBox1}"/>
 
                     <RibbonToggleButton
                         x:Name="underlineButton" LargeImageSource="Resources/UNDERLINE.png" Label ="Underline" KeyTip="U"
                         ToolTipTitle="Underline (Ctrl+U)" ToolTipDescription="Underlines your text"
-                        Command="EditingCommands.ToggleUnderline"/>
+                        Command="EditingCommands.ToggleUnderline" CommandTarget="{Binding ElementName=richTextBox1}"/>
 
                     <RibbonButton 
                         x:Name="strikeButton" SmallImageSource="Resources/STRIKE_THROUGH.png" Label="Strike Through"
@@ -165,20 +160,24 @@
                         Command="local:CustomCommands.Strike"/>
 
                     <RibbonButton 
-                        x:Name="deleteButton" SmallImageSource="Resources/DELETE.png" Label="Delete" IsEnabled="False"/>
+                        x:Name="clearFormatButton" SmallImageSource="Resources/DELETE.png" Label="Delete"
+                        Command="local:CustomCommands.Clear" />
 
                     <RibbonButton 
                         x:Name="textColorButton" SmallImageSource="Resources/TEXT COLOR.png" Label="Text Color" IsEnabled="False"
                         ToolTipTitle="Text Color" ToolTipDescription="Change the color of your text"/>
+               </RibbonGroup>
 
-                    <RibbonComboBox x:Name="cmbFontFamily" Margin="0,0,-44,0" />
+                <RibbonGroup>
+                    <ComboBox x:Name="cmbFontFamily" Margin="0,0,0,0" Width="100" SelectionChanged="cmbFontFamily_SelectionChanged"/>
 
-                    <RibbonComboBox x:Name="cmbFontSize" Margin="0,0,-22,0"/>
+                    <ComboBox x:Name="cmbFontSize" Margin="0,10,0,0" Width="100" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged"/>
                 </RibbonGroup>
+                
             </RibbonTab>
 
             <!--RibbonTab 2: ADVANCED chua cac 2 RibbonGroup; moi Group chua 1 button chuc nang-->
-            <RibbonTab Header="ADVANCED">
+            <RibbonTab Header="">
 
                 <!--Group 1 chua button Speech Synthesizer-->
                 <RibbonGroup >
@@ -201,12 +200,17 @@
         
         <!-- control richTextBox1 de nhap van ban-->
         <RichTextBox 
-            x:Name="richTextBox1" Grid.Row="1" Margin="10,10,10,10" BorderBrush="#FFABB3AB">
+            x:Name="richTextBox1" Grid.Row="1" Margin="10,10,10,10" BorderBrush="#FFABB3AB" 
+            VerticalScrollBarVisibility="Auto" 
+            HorizontalScrollBarVisibility="Auto"
+            SelectionChanged="richTextBox1_SelectionChanged">
+            
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
                 </Style>
             </RichTextBox.Resources>
+            
         </RichTextBox>
         
     </Grid>
