@@ -26,13 +26,12 @@
 
     <Grid Margin="0,0,0,0">
         
-        <!--Dinh nghia so luong va kich thuoc cac hang tren grid-->
+        <!--Xac dinh so luong va kich thuoc cac hang tren grid-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Design ribbon-->
         <Ribbon x:Name="ribbon" Width="Auto">
 
             <!-- Application Menu: chua cac item New, Open, Save, SaveAs, Exit -->
@@ -40,7 +39,7 @@
                 <RibbonApplicationMenu>
                     
                     <RibbonApplicationMenuItem 
-                        x:Name="appNew" Header="New" ImageSource ="Resources/NEW.png" KeyTip="N"
+                        x:Name="appNew" Header="New" ImageSource="Resources/NEW.png"  KeyTip="N"
                         Command="ApplicationCommands.New"/>
 
                     <RibbonApplicationMenuItem 
@@ -58,6 +57,7 @@
                     <RibbonApplicationMenuItem 
                         x:Name="appExit" Header="Exit" ImageSource ="Resources/EXIT.png"
                         Command="ApplicationCommands.Close"/>
+                    
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
@@ -70,7 +70,7 @@
                         ToolTipDescription="Save (Ctrl + S)"
                         Command="ApplicationCommands.Save"/>
                     
-                    <RibbonButton 
+                    <RibbonButton
                         x:Name="undoButton1" SmallImageSource="Resources/UNDO.png"
                         ToolTipDescription="Undo Typing (Ctrl + Z)"
                         Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=richTextBox1}"/>
@@ -79,22 +79,23 @@
                         x:Name="redoButton1" SmallImageSource="Resources/REDO.png"
                         ToolTipDescription="Redo (Ctrl + Y)"
                         Command="ApplicationCommands.Redo" CommandTarget="{Binding ElementName=richTextBox1}"/>
+                    
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
 
             <!--HelpPane -->
             <Ribbon.HelpPaneContent>
-                <RibbonButton 
-                    x:Name="helpButton" SmallImageSource="Resources/HELP.png"/>
+                <RibbonButton   x:Name="helpButton" SmallImageSource="Resources/HELP.png"/>
             </Ribbon.HelpPaneContent>
 
             <!-- RibbonTab 1: GENERAL chua cac ribbon group Clipboard, Edit, Font-->
             <RibbonTab Header="GENERAL">
 
                 <!--RibbonGroup 1: Clipboard co cac chuc nang Paste, Copy, Cut-->
-                <RibbonGroup x:Name="CilpboradGroup" Header="Clipboard" 
-                             ToolTipTitle="Clipboard" 
-                             ToolTipDescription="See all the item you've copied to the Cipboard">
+                <RibbonGroup 
+                    x:Name="CilpboradGroup" Header="Clipboard" 
+                    ToolTipTitle="Clipboard" 
+                    ToolTipDescription="See all the item you've copied to the Cipboard">
                     
                     <RibbonButton 
                         x:Name="pasteButton" LargeImageSource="Resources/PASTE.png" Label ="Paste" KeyTip="V" 
@@ -115,6 +116,7 @@
                         ToolTipDescription="Put a copy of the selection on the Clipboard so 
                                             you can paste it somewhere else"
                         Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=richTextBox1}"/>
+                    
                 </RibbonGroup>
 
                 <!--RibbonGroup 2: Edit chua cac button Undo, Redo, SelectAll -->
@@ -132,8 +134,10 @@
 
                     <RibbonButton 
                         x:Name="selectAllButton" SmallImageSource="Resources/SELECT ALL.png" Label="Select All"
-                        ToolTipTitle="Select All (Ctrl+A)" ToolTipDescription="Select all text"
+                        ToolTipTitle="Select All (Ctrl+A)" 
+                        ToolTipDescription="Select all text"
                         Command="ApplicationCommands.SelectAll" CommandTarget="{Binding ElementName=richTextBox1}"/>
+                    
                 </RibbonGroup>
 
                 <!-- RibbonGroup 3: Font chua cac button Bold, Italic, Underlined, StrikeThrough-->
@@ -166,25 +170,28 @@
                     <RibbonButton 
                         x:Name="textColorButton" SmallImageSource="Resources/TEXT COLOR.png" Label="Text Color" IsEnabled="False"
                         ToolTipTitle="Text Color" ToolTipDescription="Change the color of your text"/>
-               </RibbonGroup>
 
+                </RibbonGroup>
+                
+                <!-- RibbonGroup4: chua 2 ComboBox chinh sua FontFamily va FontSize-->
                 <RibbonGroup>
                     <ComboBox x:Name="cmbFontFamily" Margin="0,0,0,0" Width="100" SelectionChanged="cmbFontFamily_SelectionChanged"/>
-
                     <ComboBox x:Name="cmbFontSize" Margin="0,10,0,0" Width="100" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged"/>
                 </RibbonGroup>
                 
             </RibbonTab>
 
             <!--RibbonTab 2: ADVANCED chua cac 2 RibbonGroup; moi Group chua 1 button chuc nang-->
-            <RibbonTab Header="">
+            <RibbonTab Header="ADVANCE">
 
                 <!--Group 1 chua button Speech Synthesizer-->
                 <RibbonGroup >
                     <RibbonButton 
                         x:Name="speechSynthesizer" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer"
                         ToolTipDescription="Text-to-speech"
-                        Command="local:CustomCommands.Speech"/>
+                        Command="local:CustomCommands.Speech" Background="#FFD82A2A">
+   
+                    </RibbonButton>
                 </RibbonGroup>
 
                 <!--Group 2-->
@@ -203,7 +210,7 @@
             x:Name="richTextBox1" Grid.Row="1" Margin="10,10,10,10" BorderBrush="#FFABB3AB" 
             VerticalScrollBarVisibility="Auto" 
             HorizontalScrollBarVisibility="Auto"
-            SelectionChanged="richTextBox1_SelectionChanged">
+            SelectionChanged="richTextBox1_SelectionChanged" HorizontalAlignment="Left">
             
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">

@@ -196,7 +196,7 @@ namespace Test6
         //FontSize SelectionChanged
         private void cmbFontSize_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (cmbFontSize.SelectedItem != null)
+            if (cmbFontSize.SelectedValue != null)
             {
                 richTextBox1.Selection.ApplyPropertyValue(Inline.FontSizeProperty, cmbFontSize.Text);
             }
@@ -205,7 +205,7 @@ namespace Test6
         //FontFamily_SelectionChanged
         private void cmbFontFamily_SelectionChanged (object sender, SelectionChangedEventArgs e)
         {
-            if (cmbFontFamily.SelectedItem != null)
+            if (cmbFontFamily.SelectedValue != null)
             {
                 richTextBox1.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, cmbFontFamily.SelectedItem);
             }
