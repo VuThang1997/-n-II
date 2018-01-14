@@ -238,7 +238,6 @@ namespace Test6
             e.CanExecute = true;
         }
 
-        //richTextBox1 SelectionChanged
         private void richTextBox1_SelectionChanged (object sender, RoutedEventArgs e)
         {
             object temp;
@@ -262,6 +261,13 @@ namespace Test6
             //hien thi FontSize cua doan duoc chon
             temp = richTextBox1.Selection.GetPropertyValue(Inline.FontSizeProperty);
             cmbFontSize.SelectedItem = temp;
+        }
+
+        private void helpButton_Click(object sender, RoutedEventArgs e)
+        {
+            FunnyList newList = new FunnyList();
+            newList.ShowDialog();
+            newList.Close();
         }
     }
 }

@@ -32,3 +32,5 @@ C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Debug\Test6.csproj.CoreCompileI
 C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Debug\Test6.exe
 C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Debug\Test6.pdb
 C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Debug\Test6.csprojResolveAssemblyReference.cache
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Debug\FunnyList.g.cs
+C:\Users\admin.admin-PC\Do-an-II\Test6\Test6\obj\Debug\FunnyList.baml

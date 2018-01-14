@@ -64,28 +64,28 @@
             <!--QuickAccessToolbar: chua cac button Save, Undo, Redo-->
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
-                    
+
                     <RibbonButton 
                         x:Name="saveButton1" SmallImageSource="Resources/SAVE.png" KeyTip="S"
                         ToolTipDescription="Save (Ctrl + S)"
                         Command="ApplicationCommands.Save"/>
-                    
+
                     <RibbonButton
                         x:Name="undoButton1" SmallImageSource="Resources/UNDO.png"
                         ToolTipDescription="Undo Typing (Ctrl + Z)"
                         Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=richTextBox1}"/>
-                    
+
                     <RibbonButton 
                         x:Name="redoButton1" SmallImageSource="Resources/REDO.png"
                         ToolTipDescription="Redo (Ctrl + Y)"
                         Command="ApplicationCommands.Redo" CommandTarget="{Binding ElementName=richTextBox1}"/>
-                    
+
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
 
             <!--HelpPane -->
             <Ribbon.HelpPaneContent>
-                <RibbonButton   x:Name="helpButton" SmallImageSource="Resources/HELP.png"/>
+                <RibbonButton   x:Name="helpButton" SmallImageSource="Resources/HELP.png" Click="helpButton_Click"/>
             </Ribbon.HelpPaneContent>
 
             <!-- RibbonTab 1: GENERAL chua cac ribbon group Clipboard, Edit, Font-->
@@ -189,17 +189,15 @@
                     <RibbonButton 
                         x:Name="speechSynthesizer" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer"
                         ToolTipDescription="Text-to-speech"
-                        Command="local:CustomCommands.Speech" Background="#FFD82A2A">
-   
+                        Command="local:CustomCommands.Speech">
                     </RibbonButton>
                 </RibbonGroup>
 
-                <!--Group 2-->
-                <RibbonGroup >
+                <RibbonGroup>
                     <RibbonButton 
-                        x:Name="dateTime" LargeImageSource="Resources/DATE.png" Label="Date/Time"
-                        ToolTipDescription="Adding system's time"
-                        Command="local:CustomCommands.Date"/>
+                      x:Name="dateTime" LargeImageSource="Resources/DATE.png" Label="Date/Time"
+                      ToolTipDescription="Adding system's time"
+                      Command="local:CustomCommands.Date"/>
                 </RibbonGroup>
 
             </RibbonTab>
