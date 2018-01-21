@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="FunnyList" Height="300" Width="510">
     <Grid>
-        <ListBox Margin="11,13,0,11" Name="LeftListBox" HorizontalAlignment="Left" Width="159"/>
-        <ListBox Margin="0,13,21,11" Name="RightListBox" HorizontalAlignment="Right" Width="170" />
+        <ListBox Margin="11,13,0,11" Name="LeftListBox" HorizontalAlignment="Left" Width="163"/>
+        <ListBox Margin="0,13,21,11" Name="RightListBox" HorizontalAlignment="Right" Width="158" />
 
-        <Button Name="AddButton" Height="23" Margin="208,80,231,0" VerticalAlignment="Top"
+        <Button Name="AddButton" Height="23" Margin="199,13,240,0" VerticalAlignment="Top"
             Click="AddButton_Click" RenderTransformOrigin="0.65,1.087">Add &gt;&gt;</Button>
 
-        <Button Name="RemoveButton" Margin="208,125,219,121" Height="23"
-            Click="RemoveButton_Click">&lt;&lt; Remove</Button>
+        <Button Name="RemoveButton" Margin="199,67,220,0"
+            Click="RemoveButton_Click" RenderTransformOrigin="0.651,0.348" Height="23" VerticalAlignment="Top">&lt;&lt; Remove</Button>
     </Grid>
 </Window>

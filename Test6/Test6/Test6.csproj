@@ -68,6 +68,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ListBoxEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +83,9 @@
     <Compile Include="CustomCommands.cs" />
     <Compile Include="FunnyList.xaml.cs">
       <DependentUpon>FunnyList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListBoxEx.xaml.cs">
+      <DependentUpon>ListBoxEx.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -153,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\COPY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SCHEDULE.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

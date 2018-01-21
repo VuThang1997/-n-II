@@ -187,7 +187,7 @@
                 <!--Group 1 chua button Speech Synthesizer-->
                 <RibbonGroup >
                     <RibbonButton 
-                        x:Name="speechSynthesizer" LargeImageSource="Resources/SOUND.png" Label="SpeechSynthesizer"
+                        x:Name="speechSynthesizer" LargeImageSource="Resources\SOUND.png" Label="SpeechSynthesizer"
                         ToolTipDescription="Text-to-speech"
                         Command="local:CustomCommands.Speech">
                     </RibbonButton>
@@ -198,6 +198,12 @@
                       x:Name="dateTime" LargeImageSource="Resources/DATE.png" Label="Date/Time"
                       ToolTipDescription="Adding system's time"
                       Command="local:CustomCommands.Date"/>
+                </RibbonGroup>
+
+                <RibbonGroup>
+                    <RibbonButton 
+                      x:Name="checkPlan" Label="Check Plan" LargeImageSource="Resources\SCHEDULE.png"
+                        Click="checkPlan_Click"/>
                 </RibbonGroup>
 
             </RibbonTab>

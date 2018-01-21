@@ -269,5 +269,12 @@ namespace Test6
             newList.ShowDialog();
             newList.Close();
         }
+
+        private void checkPlan_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxEx scheduleList = new ListBoxEx();
+            scheduleList.ShowDialog();
+            scheduleList.Close();
+        }
     }
 }

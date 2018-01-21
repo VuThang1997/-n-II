@@ -49,9 +49,7 @@ namespace Test6
 
             RightListBox.Items.Add(currentItemText);
             if (myDataList != null)
-            {
                 myDataList.RemoveAt(currentItemIndex);
-            }
 
             LeftListBox.ItemsSource = null;
             LeftListBox.ItemsSource = myDataList;
